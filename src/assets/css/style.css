@@ -1,0 +1,296 @@
+/* * * * * * * Reset * * * * * * */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	font: inherit;
+}
+
+img {
+	max-width: 100%;
+	object-fit: cover;
+}
+
+/* * * * * * * Base * * * * * * */
+
+:root {
+	--clr-base: hsl(32deg, 57%, 95%);
+	--clr-surface: hsl(35deg, 100%, 98%);
+	--clr-overlay: hsl(33deg, 43%, 91%);
+
+	--clr-muted: hsl(249deg, 12%, 47%);
+	--clr-subtle: hsl(248deg, 12%, 52%);
+	--clr-text: hsl(248deg, 19%, 40%);
+
+	--clr-glass: color-mix(in srgb, var(--clr-surface) 75%, transparent);
+	--clr-love: hsl(343deg, 35%, 55%);
+	--clr-foam: hsl(189deg, 30%, 48%);
+
+	@media (prefers-color-scheme: dark) {
+		--clr-base: hsl(249deg, 22%, 12%);
+		--clr-surface: hsl(247deg, 23%, 15%);
+		--clr-overlay: hsl(248deg, 25%, 18%);
+
+		--clr-muted: hsl(249deg, 12%, 47%);
+		--clr-subtle: hsl(248deg, 15%, 61%);
+		--clr-text: hsl(245deg, 50%, 91%);
+
+		--clr-glass: color-mix(in srgb, var(--clr-surface) 90%, transparent);
+		--clr-love: hsl(343deg, 76%, 68%);
+		--clr-foam: hsl(189deg, 43%, 73%);
+	}
+}
+
+@font-face {
+	font-family: "Alkatra";
+	src: url(Alkatra-Variable.ttf);
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url(Inter-Variable.ttf);
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	display: grid;
+
+	color: var(--clr-text);
+	background-color: var(--clr-base);
+
+	font-family: "Inter";
+}
+
+a {
+	text-decoration: none;
+	position: relative;
+	outline: transparent;
+
+	color: var(--clr-subtle);
+	fill: var(--clr-subtle);
+
+	&.no-contrast {
+		color: inherit;
+	}
+
+	transition: color 200ms, fill 200ms;
+
+	&:hover,
+	&:focus-visible {
+		color: var(--clr-love);
+		fill: var(--clr-love);
+	}
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+
+		width: 100%;
+		height: 2px;
+		border-radius: 2px;
+
+		transition: background-color 200ms 200ms;
+	}
+
+	&:hover::before,
+	&:focus-visible::before {
+		background-color: var(--clr-love);
+	}
+}
+
+h1 {
+	font-family: "Alkatra";
+	font-size: 3rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+h1:has(+ p) {
+	margin-bottom: 6px;
+}
+
+h1 + p {
+	color: var(--clr-muted);
+	text-wrap: pretty;
+}
+
+h2 {
+	font-family: "Alkatra";
+	font-size: 2rem;
+	font-weight: 600;
+	line-height: 1;
+	color: var(--clr-subtle);
+
+	margin-bottom: 1rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+	font-family: "Alkatra";
+	color: var(--clr-subtle);
+}
+
+/* * * * * * * Sections * * * * * * */
+
+@keyframes swipe {
+	0% {
+		text-indent: -200%;
+	}
+	50%,
+	60% {
+		text-indent: 0;
+		opacity: 1;
+	}
+	100% {
+		text-indent: 9ch;
+		opacity: 0;
+	}
+}
+
+.hero {
+	display: flex;
+	gap: 2rem;
+
+	.hero-art {
+		image-rendering: pixelated;
+	}
+
+	.hero-content {
+		max-width: 55ch;
+
+		padding: 1rem;
+		padding-left: 2rem;
+
+		margin-block: 2rem;
+
+		border-radius: 0 1rem 1rem 0;
+		background: var(--clr-surface);
+	}
+
+	.greeting {
+		position: relative;
+		height: 2rem;
+		overflow: hidden;
+	}
+	.greeting::before {
+		content: "Kia Ora.";
+		position: absolute;
+		animation: swipe 4s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+	}
+	.greeting::after {
+		content: "Hello.";
+		position: absolute;
+		animation: swipe 4s cubic-bezier(0.42, 0, 0.58, 1) 2s infinite;
+		opacity: 0;
+	}
+
+	.hero-list {
+		display: flex;
+		margin-top: 1rem;
+		gap: 1rem;
+	}
+
+	.hero-list *:last-child {
+		align-content: center;
+		margin-left: auto;
+		font-size: 1.25rem;
+		font-weight: 500;
+	}
+}
+
+.content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-flow: row dense;
+	gap: 2rem;
+
+	width: 100%;
+	padding: 2rem;
+
+	&:nth-child(2) {
+		background-color: var(--clr-surface);
+	}
+
+	&:nth-child(odd) *:first-child {
+		grid-column: 2;
+	}
+
+	*:first-child {
+		justify-self: right;
+	}
+
+	.card {
+		padding: 2rem;
+		border-radius: 1rem;
+		background-color: var(--clr-surface);
+	}
+
+	.scroll-list {
+		display: flex;
+		position: relative;
+		gap: 1rem;
+		padding-bottom: 1rem;
+
+		max-width: 100%;
+		overflow: scroll hidden;
+		scrollbar-gutter: stable;
+
+		mask: linear-gradient(to right, white 95%, transparent);
+		padding-right: 5%;
+
+		img {
+			max-width: none;
+			max-height: 100%;
+		}
+	}
+}
+
+.content.full {
+	background-color: var(--clr-surface);
+}
+
+.footer {
+	margin-top: auto;
+	width: 100%;
+	padding-left: 2rem;
+	color: var(--clr-muted);
+}
+
+.post {
+	margin: 1rem;
+	padding: 1rem;
+	border-radius: 0.5rem;
+
+	background-color: var(--clr-surface);
+
+	& > .scroll-list {
+		display: flex;
+		place-content: center;
+		gap: 1rem;
+		margin-block: 1rem;
+	}
+}
+
+/* * * * * * * Tweaks * * * * * *  */
+
+.spacer {
+	flex-grow: 1;
+}
+
+.mark {
+	height: 2rem;
+	aspect-ratio: 1;
+}
+
+.mtg-card {
+	border-radius: 24px;
+	width: 366px;
+	height: 510px;
+}

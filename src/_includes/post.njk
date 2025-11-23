@@ -1,0 +1,16 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<article class="post">
+
+  <h1>{{ title }}</h1>
+
+  {% if date %}
+    <p class="post-date">{{ date }}</p>
+  {% endif %}
+
+
+  {{ content | safe }}
+
+</article>
+{% endblock %}

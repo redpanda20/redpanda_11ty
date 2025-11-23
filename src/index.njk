@@ -1,0 +1,10 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  {% include "hero.njk" %}
+
+  {% for item in collections.posts %}
+    {% include "card.njk" %}
+  {% endfor %}
+  
+{% endblock %}

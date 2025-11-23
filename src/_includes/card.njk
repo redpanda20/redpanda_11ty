@@ -1,0 +1,43 @@
+<article class="content">
+
+    {% if item.data.images %}
+    <div class="scroll-list">
+        {% for img in item.data.images %}
+          {% set imgClass = img.class or '' %}
+          {% if img.link %}
+            <a href="{{ img.link }}" target="_blank" rel="noopener">
+              <img class="{{ imgClass }}" src="{{ img.src }}" alt="{{ item.data.title }} image" />
+            </a>
+          {% else %}
+            <img class="{{ imgClass }}" src="{{ img.src }}" alt="{{ item.data.title }} image" />
+          {% endif %}
+        {% endfor %}
+    </div>
+
+    {% elseif item.data.image %}
+      <img src="{{ item.data.image }}" alt="{{ item.data.title }}" />
+    {% endif %}
+    
+  <div class="card">
+
+    <h2>{% if item.data.permalink == false %}
+    
+    {{ item.data.title }}
+
+    {% else %}
+
+    <a href="/posts/{{ item.fileSlug }}/">{{ item.data.title }}</a>
+
+    {% endif %}
+
+    </h2>
+
+    {% if item.data.preview %}
+
+      <p>{{ item.data.preview }}</p>
+
+    {% endif %}
+    
+  </div>
+
+</article>
