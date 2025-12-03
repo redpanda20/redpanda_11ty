@@ -2,7 +2,7 @@
 
     {% if item.data.image %}
 
-    <img src="{{ item.data.image | url }}" alt="{{ item.data.title }}" />
+    <img src="{{ item.data.image | url }}" alt="" />
 
     {% elseif item.data.images %}
 
@@ -10,11 +10,17 @@
   
         {% for img in item.data.images %}
 
-          {% if img.link %} <a href="{{ img.link }}" target="_blank" rel="noopener"> {% endif %}
+          {% if img.link %}
+          
+            <a href="{{ img.link }}" target="_blank" rel="noopener">
+                <img class="{{ img.class }}" src="{{ img.src | url }}" alt="Link to {{ img.link }}" />
+            </a>
 
-              <img class="{{ img.class }}" src="{{ img.src | url }}" alt="{{ item.data.title }} image" />
+          {% else %}
 
-          {% if img.link %} </a> {% endif %}
+            <img class="{{ img.class }}" src="{{ img.src | url }}" alt="" />
+
+          {% endif %}
 
         {% endfor %}
     </div>
@@ -29,7 +35,7 @@
 
     {% else %}
 
-    <a href="/posts/{{ item.fileSlug }}/">{{ item.data.title }}</a>
+    <a href="{{ item.url | url }}">{{ item.data.title }}</a>
 
     {% endif %}
 

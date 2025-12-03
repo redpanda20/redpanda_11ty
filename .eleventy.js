@@ -1,4 +1,5 @@
 const htmlmin = require("html-minifier");
+const lightningCSS = require("@11tyrocks/eleventy-plugin-lightningcss");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({"src/assets": "assets"});
@@ -12,6 +13,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
     if(outputPath && outputPath.endsWith(".html")) {
       return htmlmin.minify(content, {
+        minifyCSS: true,
         collapseWhitespace: true,
         removeComments: true,
         removeRedundantAttributes: true,
@@ -20,6 +22,9 @@ module.exports = function(eleventyConfig) {
     }
     return content;
   });
+
+  // CSS Minification
+  eleventyConfig.addPlugin(lightningCSS);
 
   return {
     dir: {
